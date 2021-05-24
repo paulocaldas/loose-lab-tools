@@ -47,6 +47,10 @@ def GetAcqTimes(files, dirname, thres = 0, cutoff = 100, col = 'TRACK_DURATION',
                 acq_time = re.sub('msec', '', elem)
                 acq_time = float(acq_time)/1000
                 
+            elif 'ms' in elem:
+                acq_time = re.sub('ms', '', elem)
+                acq_time = float(acq_time)/1000
+                
             elif 'sec' in elem:
                 acq_time = float(re.sub('sec', '', elem))
                 
