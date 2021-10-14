@@ -1,18 +1,15 @@
 # Trajectory-Motion-Classification
-batch of functions and algorithms to visualize and characterize different types of motion
+batch of functions and algorithms that has been useful in the Loose Lab
 
  notebooks:
- - Trajectory_SubSegment_Classification_v2021
- (all the functions are kept here until we have a final version) 
  
- - Step Size Distribution Analysis
- (all main functions are included. Is this good enough?)
+ - Step Size Distribution Analysis: functions to compute directionality using this approach <br>
+ haven't been used efficiently, but has potential
  
- - Visualize Individual Trajectories
- (runs with a single input: path/to/filename - main functions are in the src folder)
+ - Visualize Individual Trajectories: small script to visualize multiple trajectories <br>
+ runs with a single input: path/to/filename (main functions are in the src folder)
  
- 
- 
-  ... should write some minimal documentation here at some point ... 
+ - photobleach-correction: automatizate photobleach correction <br> 
+ approach: https://pubmed.ncbi.nlm.nih.gov/28065316/ 
  
  
