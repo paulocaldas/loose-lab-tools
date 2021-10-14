@@ -1,6 +1,6 @@
 # Loose Lab Tools
 
-batch of functions and algorithms that has been useful in the Loose Lab
+### functions and algorithms that might be useful
 
  notebooks:
  
