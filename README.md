@@ -1,4 +1,5 @@
-# Trajectory-Motion-Classification
+# Loose Lab Tools
+
 batch of functions and algorithms that has been useful in the Loose Lab
 
  notebooks:
