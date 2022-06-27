@@ -66,7 +66,9 @@ def GetAcqTimes(files, dirname, thres = 0, cutoff = 100, col = 'TRACK_DURATION',
         
     return acq_times
 
-def ComputePhotobleachCorrection(t_exp = 0.5, thres = 1, cutoff = 100, bin_width = 2, plot_xlim = 6, col = 'TRACK_DURATION'):
+def ComputePhotobleachCorrection(t_exp = 0.5, thres = 1, cutoff = 100,
+                                 bin_width = 2, plot_xlim = 6, col = 'TRACK_DURATION'):
+    
     ''' this function fits a monoexponential decay to each distribution and saves all 
     parameters in a table'''
     
@@ -111,11 +113,11 @@ def ComputePhotobleachCorrection(t_exp = 0.5, thres = 1, cutoff = 100, bin_width
     x_axis = table_param.acq_time
     y_axis = table_param.tau_app * (table_param.acq_time)
 
-    linear_reg = lambda x, m, b: m*x + b #linear regression
+    linear_reg = lambda x, m, b: m*x - b #linear regression
     linear_param, linear_cov = curve_fit(linear_reg, x_axis, y_axis)
 
     c_pb = linear_param[1]/t_exp #photobleaching constant
-    tau  = 1/linear_param[0]
+    tau  = linear_param[0]
 
     #plt.figure(figsize = (4,3), dpi = 120)
     ax[1].plot(x_axis, y_axis, 'o', markeredgecolor = 'black', markersize = 6)
