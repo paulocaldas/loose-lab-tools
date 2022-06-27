@@ -115,7 +115,7 @@ def ComputePhotobleachCorrection(t_exp = 0.5, thres = 1, cutoff = 100, bin_width
     linear_param, linear_cov = curve_fit(linear_reg, x_axis, y_axis)
 
     c_pb = linear_param[1]/t_exp #photobleaching constant
-    tau  = linear_param[0]
+    tau  = 1/linear_param[0]
 
     #plt.figure(figsize = (4,3), dpi = 120)
     ax[1].plot(x_axis, y_axis, 'o', markeredgecolor = 'black', markersize = 6)
