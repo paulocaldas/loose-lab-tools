@@ -12,7 +12,7 @@ still not used efficiently, but has potential
 small script to visualize multiple trajectories <br>
 runs with a single input: path/to/filename (main functions are in the src folder)
  
-#### Photobleach-correction Automatization <br> 
+#### Photobleach-Correction Automatization <br> 
 approach adapted from https://pubmed.ncbi.nlm.nih.gov/28065316/ 
  
 data from each experiment is fitted to mono-exponential decay using:
