@@ -17,7 +17,7 @@ def OpenFileDialog():
     dialog = QtWidgets.QFileDialog()
     
     # filename are saved in a list according with the order of selection
-    files, _  = dialog.getOpenFileNames(None, "Select Multiple Files in the Proper Order ", '', filter = "All files (*)")
+    files, _  = dialog.getOpenFileNames(None, "Select Files", '', filter = "All files (*)")
     
     # use one of the files to save directory
     dirname = os.path.dirname(files[0]) 
@@ -77,6 +77,8 @@ def ComputePhotobleachCorrection(t_exp = 0.5, thres = 1, cutoff = 100,
     param_list = []
 
     fig, ax = plt.subplots(1,2,figsize = (8,3), dpi = 120)
+    plt.subplots_adjust(wspace = 0.3)
+    
     colors = plt.cm.viridis
 
     for n, file in enumerate(AcqTimes):
@@ -111,13 +113,13 @@ def ComputePhotobleachCorrection(t_exp = 0.5, thres = 1, cutoff = 100,
     table_param = pd.DataFrame(param_list, columns = ['acq_time','tau_app']).sort_values('acq_time')
 
     x_axis = table_param.acq_time
-    y_axis = table_param.tau_app * (table_param.acq_time)
+    y_axis = (1/table_param.tau_app) * (table_param.acq_time)
 
-    linear_reg = lambda x, m, b: m*x - b #linear regression
+    linear_reg = lambda x, m, b: m*x + b #linear regression
     linear_param, linear_cov = curve_fit(linear_reg, x_axis, y_axis)
 
     c_pb = linear_param[1]/t_exp #photobleaching constant
-    tau  = linear_param[0]
+    tau  = 1/linear_param[0]
 
     #plt.figure(figsize = (4,3), dpi = 120)
     ax[1].plot(x_axis, y_axis, 'o', markeredgecolor = 'black', markersize = 6)
@@ -126,7 +128,7 @@ def ComputePhotobleachCorrection(t_exp = 0.5, thres = 1, cutoff = 100,
     ax[1].plot(x_fit_lin, linear_reg(x_fit_lin, *linear_param), '--', color = 'crimson', 
                label = 'tau = {:.3} sec \npb_k = {:4.2}'.format(tau,c_pb))
 
-    ax[1].set_ylabel('acq_time * tau_app'); ax[1].set_xlabel('acq_time(s)')
+    ax[1].set_ylabel('acq_time/tau_app'); ax[1].set_xlabel('acq_time(s)')
     ax[1].legend(frameon = False, fontsize = 10)
 
     'tau = {:.3} sec, C_pb = {:.3}'.format(tau,c_pb)
